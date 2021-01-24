@@ -19,9 +19,9 @@ public class Lab1 {
   /** The maximum tolerated deviation from the ideal WALL_DIST, aka the deadband, in cm. */
   public static final int WALL_DIST_ERR_THRESH = 3;
   /** Speed of slower rotating wheel (deg/sec). */
-  public static final int MOTOR_LOW = 15;
+  public static final int MOTOR_LOW = 17;
   /** Speed of the faster rotating wheel (deg/sec). */
-  public static final int MOTOR_HIGH = 400;
+  public static final int MOTOR_HIGH = 396;
   /** The limit of invalid samples that we read from the US sensor before assuming no obstacle. */
   public static final int INVALID_SAMPLE_LIMIT = 20;
 
