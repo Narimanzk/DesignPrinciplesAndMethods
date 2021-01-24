@@ -40,6 +40,8 @@ public class Lab1 {
   private static int prevDistance;
   /** The number of invalid samples seen by filter() so far. */
   private static int invalidSampleCount;
+  /** The distance error. */
+  private static int distance_error = 0;
 
   // These arrays are class variables to avoid creating new ones at each iteration.
   /** Buffer (array) to store US samples. */
@@ -65,6 +67,9 @@ public class Lab1 {
     while (true) {
       controller(readUsDistance(), motorSpeeds);
       setMotorSpeeds();
+      leftMotor.forward();
+      rightMotor.forward();
+    
     }
   }
   
@@ -77,8 +82,21 @@ public class Lab1 {
   public static void controller(int distance, int[] motorSpeeds) {
     int leftSpeed = MOTOR_HIGH;
     int rightSpeed = MOTOR_HIGH;
-    
-    // TODO Calculate the correct motor speeds and assign them to motorSpeeds like this
+    if (distance < MAX_SENSOR_DIST) {
+      distance_error = WALL_DIST - distance;
+      
+      if (Math.abs(distance_error) <= WALL_DIST_ERR_THRESH) {
+        leftSpeed = MOTOR_HIGH;
+        rightSpeed = MOTOR_HIGH;
+      } else if (distance_error > 0) {
+        leftSpeed = MOTOR_HIGH + MOTOR_LOW;
+        rightSpeed = MOTOR_LOW;
+
+      } else if (distance_error < 0) {
+        leftSpeed = MOTOR_LOW;
+        rightSpeed = MOTOR_HIGH;
+      }
+    }
     
     motorSpeeds[LEFT] = leftSpeed;
     motorSpeeds[RIGHT] = rightSpeed;
