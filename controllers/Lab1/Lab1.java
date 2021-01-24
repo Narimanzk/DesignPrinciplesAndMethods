@@ -15,13 +15,13 @@ public class Lab1 {
   //Parameters: adjust these for desired performance. You can also add new ones.
   
   /** Ideal distance between the sensor and the wall (cm). */
-  public static final int WALL_DIST = 30;
+  public static final int WALL_DIST = 50;
   /** The maximum tolerated deviation from the ideal WALL_DIST, aka the deadband, in cm. */
   public static final int WALL_DIST_ERR_THRESH = 3;
   /** Speed of slower rotating wheel (deg/sec). */
-  public static final int MOTOR_LOW = 25;
+  public static final int MOTOR_LOW = 15;
   /** Speed of the faster rotating wheel (deg/sec). */
-  public static final int MOTOR_HIGH = 200;
+  public static final int MOTOR_HIGH = 400;
   /** The limit of invalid samples that we read from the US sensor before assuming no obstacle. */
   public static final int INVALID_SAMPLE_LIMIT = 20;
 
