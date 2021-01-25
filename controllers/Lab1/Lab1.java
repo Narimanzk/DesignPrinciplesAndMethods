@@ -15,7 +15,7 @@ public class Lab1 {
   //Parameters: adjust these for desired performance. You can also add new ones.
   
   /** Ideal distance between the sensor and the wall (cm). */
-  public static final int WALL_DIST = 50;
+  public static final int WALL_DIST = 45;
   /** The maximum tolerated deviation from the ideal WALL_DIST, aka the deadband, in cm. */
   public static final int WALL_DIST_ERR_THRESH = 3;
   /** Speed of slower rotating wheel (deg/sec). */
@@ -40,8 +40,8 @@ public class Lab1 {
   private static int prevDistance;
   /** The number of invalid samples seen by filter() so far. */
   private static int invalidSampleCount;
-  /** The distance error. */
-  private static int distance_error = 0;
+  /** The difference between the actual and ideal distance of robot from the wall. */
+  private static int distance_error;
 
   // These arrays are class variables to avoid creating new ones at each iteration.
   /** Buffer (array) to store US samples. */
@@ -84,20 +84,21 @@ public class Lab1 {
     int rightSpeed = MOTOR_HIGH;
     if (distance < MAX_SENSOR_DIST) {
       distance_error = WALL_DIST - distance;
-      
+      //When the sensor detects no obstacles the robot goes straight
       if (Math.abs(distance_error) <= WALL_DIST_ERR_THRESH) {
         leftSpeed = MOTOR_HIGH;
         rightSpeed = MOTOR_HIGH;
+      //When the sensor detects the robot is getting too close to the wall it goes to the right
       } else if (distance_error > 0) {
         leftSpeed = MOTOR_HIGH + MOTOR_LOW;
         rightSpeed = MOTOR_LOW;
-
+      //When the sensor detects the robot is getting too far from the wall it goes to the left
       } else if (distance_error < 0) {
         leftSpeed = MOTOR_LOW;
         rightSpeed = MOTOR_HIGH;
       }
     }
-    
+    //Sets the speed of left and right motors
     motorSpeeds[LEFT] = leftSpeed;
     motorSpeeds[RIGHT] = rightSpeed;
   }
