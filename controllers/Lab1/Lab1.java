@@ -17,11 +17,11 @@ public class Lab1 {
   /** Ideal distance between the sensor and the wall (cm). */
   public static final int WALL_DIST = 45;
   /** The maximum tolerated deviation from the ideal WALL_DIST, aka the deadband, in cm. */
-  public static final int WALL_DIST_ERR_THRESH = 3;
+  public static final int WALL_DIST_ERR_THRESH = 5;
   /** Speed of slower rotating wheel (deg/sec). */
-  public static final int MOTOR_LOW = 17;
+  public static final int MOTOR_LOW = 80;
   /** Speed of the faster rotating wheel (deg/sec). */
-  public static final int MOTOR_HIGH = 396;
+  public static final int MOTOR_HIGH = 300;
   /** The limit of invalid samples that we read from the US sensor before assuming no obstacle. */
   public static final int INVALID_SAMPLE_LIMIT = 20;
 
@@ -84,6 +84,7 @@ public class Lab1 {
     int rightSpeed = MOTOR_HIGH;
     if (distance < MAX_SENSOR_DIST) {
       distance_error = WALL_DIST - distance;
+      System.out.println("Distance error" + distance_error);
       //When the sensor detects no obstacles the robot goes straight
       if (Math.abs(distance_error) <= WALL_DIST_ERR_THRESH) {
         leftSpeed = MOTOR_HIGH;
