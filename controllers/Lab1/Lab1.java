@@ -84,7 +84,6 @@ public class Lab1 {
     int rightSpeed = MOTOR_HIGH;
     if (distance < MAX_SENSOR_DIST) {
       distance_error = WALL_DIST - distance;
-      System.out.println("Distance error" + distance_error);
       //When the sensor detects no obstacles the robot goes straight
       if (Math.abs(distance_error) <= WALL_DIST_ERR_THRESH) {
         leftSpeed = MOTOR_HIGH;
